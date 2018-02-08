@@ -1,0 +1,22 @@
+version: '2'
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: blackmore22
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  prestashop:
+    image: prestashop/prestashop
+    environment:
+      DB_SERVER: mysql
+    stdin_open: true
+    tty: true
+    links:
+    - mysql:mysql
+    ports:
+    - 80:80/tcp
+    labels:
+      io.rancher.container.pull_image: always
